@@ -36,8 +36,8 @@ public class SimpleBanking {
         case "2":
           System.out.println("Deposit");
           System.out.println("-------------\n");
-          System.out.println("Enter amount to deposit: ");
-          amount = scanner.nextDouble();
+          System.out.println("Enter amount to deposit.");
+          amount = getValidDouble(scanner);
           try {
             currentBalance = account.deposit(amount);
             System.out.println("Successfully deposited $" + String.format("%.2f", amount) + " to your account.");
@@ -53,8 +53,8 @@ public class SimpleBanking {
         case "3":
           System.out.println("Withdrawal");
           System.out.println("-------------\n");
-          System.out.println("Enter amount to withdrawal: ");
-          amount = scanner.nextDouble();
+          System.out.println("Enter amount to withdrawal.");
+          amount = getValidDouble(scanner);
           try {
             currentBalance = account.withdrawal(amount);
             System.out.println("Successfully withdrew $" + String.format("%.2f", amount) + " from your account.");
@@ -83,5 +83,23 @@ public class SimpleBanking {
       
     }
     scanner.close();
+  }
+
+  public static double getValidDouble(Scanner scanner) {
+    double amount = 0.0;
+    boolean isValidAmount = false;
+
+    while (!isValidAmount) {
+        System.out.println("Please enter a number:");
+
+        try {
+            amount = scanner.nextDouble(); // Attempt to read a double
+            isValidAmount = true; // Valid input, exit the loop
+        } catch (InputMismatchException e) {
+            System.out.println("You must enter a valid number."); // Handle invalid input
+            scanner.next(); // Clear the invalid input from the scanner
+        }
+    }
+    return amount;
   }
 }
