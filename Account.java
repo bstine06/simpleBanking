@@ -12,7 +12,7 @@ public class Account {
 
   public double deposit(double amount) {
     if (amount <= 0) {
-      throw new IllegalArgumentException("Deposit amount must be greater than 0.");
+      throw new InvalidAmountException("Deposit amount must be greater than 0.");
     }
     balance += amount;
     return balance;
@@ -20,10 +20,10 @@ public class Account {
 
   public double withdrawal(double amount) {
     if (balance - amount < 0) {
-      throw new IllegalArgumentException("Withdrawal amount greater than available balance.");
+      throw new InsufficientBalanceException("Withdrawal amount greater than available balance.");
     }
     if (amount <= 0) {
-      throw new IllegalArgumentException("Withdrawal amount must be greater than 0.");
+      throw new InvalidAmountException("Withdrawal amount must be greater than 0.");
     }
     balance -= amount;
     return balance;
